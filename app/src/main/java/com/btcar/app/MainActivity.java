@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         // Tabs
         tabControl.setOnClickListener(v -> switchTab(true));
         tabDebug.setOnClickListener(v -> switchTab(false));
+        switchTab(true);
 
         // Direction buttons (single-click toggle)
         btnF.setOnClickListener(v -> { send("F"); tvCurrentCmd.setText("▲ 前进中"); });
