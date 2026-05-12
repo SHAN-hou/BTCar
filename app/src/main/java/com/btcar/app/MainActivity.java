@@ -5,13 +5,10 @@ import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,28 +57,13 @@ public class MainActivity extends AppCompatActivity {
             else showDeviceList();
         });
 
-        bind(btnF, "F");
-        bind(btnB, "B");
-        bind(btnL, "L");
-        bind(btnR, "R");
+        btnF.setOnClickListener(v -> send("F"));
+        btnB.setOnClickListener(v -> send("B"));
+        btnL.setOnClickListener(v -> send("L"));
+        btnR.setOnClickListener(v -> send("R"));
         btnS.setOnClickListener(v -> send("S"));
 
         requestPerms();
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    private void bind(Button btn, String cmd) {
-        btn.setOnTouchListener((v, e) -> {
-            if (!isConnected) return false;
-            if (e.getAction() == MotionEvent.ACTION_DOWN) {
-                send(cmd);
-                v.setPressed(true);
-            } else if (e.getAction() == MotionEvent.ACTION_UP || e.getAction() == MotionEvent.ACTION_CANCEL) {
-                send("S");
-                v.setPressed(false);
-            }
-            return true;
-        });
     }
 
     private void requestPerms() {
